@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Dashboard | WebApp</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+        }
+
+        header {
+            background: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+        }
+
+        header h2 {
+            color: #2563eb;
+        }
+
+        .logout-btn {
+            padding: 9px 18px;
+            border: none;
+            border-radius: 7px;
+            background: #ef4444;
+            color: white;
+            cursor: pointer;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .welcome-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .welcome-card h1 {
+            margin-bottom: 12px;
+        }
+
+        .welcome-card p {
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h2>WebApp</h2>
+
+        <button class="logout-btn" id="logoutBtn">
+            Logout
+        </button>
+    </header>
+
+    <main>
+
+        <section class="welcome-card">
+
+            <h1>Welcome 👋</h1>
+
+            <p>
+                You are successfully logged in to your account.
+            </p>
+
+        </section>
+
+    </main>
+<script>
+document.getElementById("logoutBtn").addEventListener("click",async()=>{
+    const response=await fetch("/api/logout",{
+        method:"POST"
+    });
+    const data=await response.json();
+    if(response.ok){
+        window.location.replace("/");
+    }
+    else{
+        alert(data.message);
+    }
+});
+    </script>
+</body>
+
+</html>

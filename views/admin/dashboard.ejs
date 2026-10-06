@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | WebApp</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        /* Header */
+
+        header {
+            height: 70px;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 35px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h2 {
+            font-size: 21px;
+            color: #2563eb;
+        }
+
+        .admin-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .admin-name {
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .logout-btn {
+            padding: 9px 17px;
+            border: 1px solid #e2e8f0;
+            border-radius: 7px;
+            background: white;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .logout-btn:hover {
+            background: #fef2f2;
+        }
+
+        /* Main */
+
+        main {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 35px 25px;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            font-size: 26px;
+            margin-bottom: 7px;
+        }
+
+        .page-title p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Stats */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 22px;
+        }
+
+        .stat-card span {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .stat-card h2 {
+            margin-top: 8px;
+            font-size: 26px;
+        }
+
+        /* Users Section */
+
+        .users-section {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .users-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .users-header h2 {
+            font-size: 19px;
+        }
+
+        #userSearch {
+            width: 280px;
+            padding: 10px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        #userSearch:focus {
+            border-color: #2563eb;
+        }
+
+        /* Table */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        td {
+            color: #334155;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 0 18px;
+            }
+
+            .admin-name {
+                display: none;
+            }
+
+            main {
+                padding: 25px 15px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .users-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+
+            #userSearch {
+                width: 100%;
+            }
+
+            .users-section {
+                padding: 18px;
+            }
+        }
+        .users-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.users-header h2 {
+    margin: 0;
+}
+
+#addUserBtn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #111827;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#addUserBtn:hover {
+    background: #1f2937;
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header>
+
+        <h2>Admin Panel</h2>
+
+        <div class="admin-info">
+
+            <span class="admin-name">
+                Administrator
+            </span>
+
+            <button class="logout-btn" id="adminLogoutBtn">
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main Content -->
+
+    <main>
+
+        <!-- Page Title -->
+
+        <div class="page-title">
+
+            <h1>Dashboard</h1>
+
+            <p>
+                Manage users and monitor your application.
+            </p>
+
+        </div>
+
+
+        <!-- Statistics -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <span>Total Users</span>
+
+                <h2 id="totalUsers">
+                    —
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>New Registrations</span>
+
+                <h2 id="newRegistrations">—</h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>System Status</span>
+
+                <h2>Active</h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- Users -->
+
+        <section class="users-section">
+
+            <div class="users-header">
+
+                <h2>Registered Users</h2>
+                <button id="addUserBtn">+Add User</button>
+                <input
+                    type="text"
+                    id="userSearch"
+                    placeholder="Search by name or email...">
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Registered On</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="usersTableBody">
+
+                        <tr>
+                            <td colspan="3">
+                                Loading users...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="/js/script.js"></script>
+
+</body>
+
+</html>

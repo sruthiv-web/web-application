@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add User</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 16px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 11px 18px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        #createUserBtn {
+            background: #111827;
+            color: white;
+        }
+
+        #cancelBtn {
+            background: #e5e7eb;
+            margin-left: 8px;
+        }
+
+        #message {
+            margin-bottom: 15px;
+            color: rgb(67, 67, 188);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h2>Add New User</h2>
+
+        <p id="message"></p>
+
+        <form id="addUserForm" >
+
+            <label>Name</label>
+            <input type="text" id="name"  required>
+
+            <label>Email</label>
+            <input type="email" id="email" required>
+
+            <label>Password</label>
+            <input type="password" id="password" required>
+
+            <label>Confirm Password</label>
+            <input type="password" id="confirmPassword" required>
+
+            <button type="submit" id="createUserBtn">
+                Create User
+            </button>
+
+            <button type="button" id="cancelBtn">
+                Cancel
+            </button>
+
+        </form>
+
+    </div>
+
+    <script src="/js/script.js"></script>
+    
+
+</body>
+</html>
